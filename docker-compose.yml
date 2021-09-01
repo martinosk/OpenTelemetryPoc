@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  kafka-server:
+    image: spotify/kafka
+    ports:
+        - "2181:2181"
+        - "9092:9092"
+    environment:
+      ADVERTISED_PORT: "9092"
+      ADVERTISED_HOST: "localhost"
+      AUTO_CREATE_TOPICS: "true"
