@@ -1,10 +1,7 @@
-﻿using Confluent.Kafka;
-using Dafda.Producing;
+﻿using Dafda.Producing;
 using OpenTelemetry;
 using OpenTelemetry.Context.Propagation;
-using OpenTelemetry.Trace;
 using SomeMessages;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;

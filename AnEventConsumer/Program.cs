@@ -1,10 +1,7 @@
-﻿using System;
-using Dafda.Configuration;
-using Microsoft.Extensions.Configuration;
+﻿using Dafda.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenTelemetry;
-using OpenTelemetry.Exporter;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using SomeMessages;
