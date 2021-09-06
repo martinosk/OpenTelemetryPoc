@@ -15,6 +15,7 @@ using Dafda;
 using Dafda.Configuration;
 using OpenTelemetry.Trace;
 using OpenTelemetry.Resources;
+using SomeMessages;
 
 namespace SomeOtherApi
 {
@@ -39,6 +40,7 @@ namespace SomeOtherApi
                 cfg.AddAspNetCoreInstrumentation()
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("SomeOtherApi"))
                 .AddHttpClientInstrumentation()
+                .AddSource(nameof(MessageProducer))
                 .AddJaegerExporter()
                 .SetSampler(new AlwaysOnSampler()));
 
