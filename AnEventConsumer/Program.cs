@@ -33,7 +33,8 @@ namespace AnEventConsumer
                 .AddJaegerExporter(opts =>
                 {
                     opts.ExportProcessorType = ExportProcessorType.Simple;
-                });
+                })
+                .AddZipkinExporter();
             });
         });
 

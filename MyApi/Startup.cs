@@ -26,6 +26,7 @@ namespace MyApi
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("MyApi"))
                 .AddHttpClientInstrumentation()
                 .AddJaegerExporter()
+                .AddZipkinExporter()
                 .SetSampler(new AlwaysOnSampler()));
             services.AddControllers();
             services.AddSwaggerGen(c =>
