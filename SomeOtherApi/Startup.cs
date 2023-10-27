@@ -28,7 +28,7 @@ namespace SomeOtherApi
                 options.WithConfiguration("bootstrap.servers", "localhost");
                 options.Register<SomeMessage>("sometopic", "some_message", x => x.Id.ToString());
             });
-            services.AddOpenTelemetryTracing(cfg =>
+            services.AddOpenTelemetry().WithTracing(cfg =>
                 cfg.AddAspNetCoreInstrumentation()
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("SomeOtherApi"))
                 .AddHttpClientInstrumentation()

@@ -21,7 +21,7 @@ namespace MyApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOpenTelemetryTracing(cfg => 
+            services.AddOpenTelemetry().WithTracing(cfg => 
                 cfg.AddAspNetCoreInstrumentation()
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("MyApi"))
                 .AddHttpClientInstrumentation()

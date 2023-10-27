@@ -25,7 +25,7 @@ namespace AnEventConsumer
                 f.WithGroupId("aneventconsumergroup");
                 f.RegisterMessageHandler<SomeMessage, SomeMessageHandler>("sometopic", SomeMessage.FriendlyName);
             });
-            services.AddOpenTelemetryTracing((builder) =>
+            services.AddOpenTelemetry().WithTracing((builder) =>
             {
                 builder
                 .AddSource(nameof(SomeMessageHandler))
