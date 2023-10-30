@@ -35,6 +35,7 @@ namespace SomeOtherApi
                 .AddSource(nameof(MessageProducer))
                 .AddJaegerExporter()
                 .AddZipkinExporter()
+                .AddConsoleExporter()
                 .SetSampler(new AlwaysOnSampler()));
 
             services.AddControllers();

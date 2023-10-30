@@ -18,7 +18,7 @@ namespace MyApi.Controllers
         [HttpGet]
         public async Task<string> Get()
         {
-            var response = await _client.GetAsync("https://localhost:5003/Text");
+            var response = await _client.GetAsync("https://localhost:5003/summary");
             var r = response.EnsureSuccessStatusCode();
             return await r.Content.ReadAsStringAsync();
         }

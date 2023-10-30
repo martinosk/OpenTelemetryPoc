@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace MyApi.Controllers
@@ -12,34 +13,42 @@ namespace MyApi.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-          {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<WeatherForecastController> _logger;
         private readonly HttpClient _client;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController()
         {
-            _logger = logger;
             _client = new HttpClient();
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<WeatherForecast>> GetWithInternalCall()
+        [HttpGet(nameof(Get))]
+        public async Task<IEnumerable<WeatherForecast>> Get()
         {
-            var response = await _client.GetAsync("https://localhost:5001/api/values");
-            var r = response.EnsureSuccessStatusCode();
-            var body = await r.Content.ReadAsStringAsync();
+            var result = new List<WeatherForecast>();
+            for(var i = 1; i<=3; i++)
+            {
+                result.Add(await GetWeatherForecast(i));
+            }
+            return result;
+        }
+
+        [HttpGet(nameof(GetFast))]
+        public async Task<IEnumerable<WeatherForecast>> GetFast()
+        {
+            return await Task.WhenAll(Enumerable.Range(1, 3).Select(GetWeatherForecast));
+        }
+
+        private async Task<WeatherForecast> GetWeatherForecast(int index)
+        {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            var response = await _client.GetAsync("https://localhost:5001/api/values");
+            var result = response.EnsureSuccessStatusCode();
+            var body = await result.Content.ReadAsStringAsync();
+            return new WeatherForecast()
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)] + body
-            })
-            .ToArray();
+                Summary = body
+            };
         }
     }
 }

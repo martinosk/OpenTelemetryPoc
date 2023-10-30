@@ -1,29 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SomeMessages;
+using System;
 using System.Threading.Tasks;
 
 namespace SomeOtherApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TextController : ControllerBase
+    public class SummaryController : ControllerBase
     {
-        private readonly ILogger<TextController> _logger;
         private readonly MessageProducer producer;
 
+        private static readonly string[] Summaries = new[]
+          {
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
 
-        public TextController(ILogger<TextController> logger, MessageProducer producer)
+        public SummaryController(MessageProducer producer)
         {
-            _logger = logger;
             this.producer = producer;
         }
 
         [HttpGet]
         public async Task<string> Get()
         {
+            var rng = new Random();
             await producer.Produce(new SomeMessage());
-            return "Hello";
+            return Summaries[rng.Next(Summaries.Length)];
         }
     }
 }
