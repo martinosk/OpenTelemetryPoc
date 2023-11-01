@@ -30,10 +30,7 @@ namespace AnEventConsumer
                 builder
                 .AddSource(nameof(SomeMessageHandler))
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("AnEventConsumer"))
-                .AddJaegerExporter(opts =>
-                {
-                    opts.ExportProcessorType = ExportProcessorType.Simple;
-                })
+                .AddOtlpExporter()
                 .AddZipkinExporter();
             });
         });

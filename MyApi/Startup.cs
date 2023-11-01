@@ -25,7 +25,7 @@ namespace MyApi
                 cfg.AddAspNetCoreInstrumentation()
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("MyApi"))
                 .AddHttpClientInstrumentation()
-                .AddJaegerExporter()
+                .AddOtlpExporter()
                 .AddZipkinExporter()
                 .SetSampler(new AlwaysOnSampler()));
             services.AddControllers();

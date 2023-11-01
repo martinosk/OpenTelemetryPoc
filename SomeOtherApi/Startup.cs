@@ -33,9 +33,8 @@ namespace SomeOtherApi
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("SomeOtherApi"))
                 .AddHttpClientInstrumentation()
                 .AddSource(nameof(MessageProducer))
-                .AddJaegerExporter()
+                .AddOtlpExporter()
                 .AddZipkinExporter()
-                .AddConsoleExporter()
                 .SetSampler(new AlwaysOnSampler()));
 
             services.AddControllers();
