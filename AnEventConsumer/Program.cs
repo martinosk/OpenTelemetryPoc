@@ -29,7 +29,7 @@ namespace AnEventConsumer
             {
                 builder
                 .AddSource(nameof(SomeMessageHandler))
-                .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("AnEventConsumer"))
+                .ConfigureResource(cfg => cfg.AddService("AnEventConsumer"))
                 .AddOtlpExporter()
                 .AddZipkinExporter();
             });

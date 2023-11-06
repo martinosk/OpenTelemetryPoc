@@ -23,7 +23,7 @@ namespace MyApi
         {
             services.AddOpenTelemetry().WithTracing(cfg => 
                 cfg.AddAspNetCoreInstrumentation()
-                .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("MyApi"))
+                .ConfigureResource(cfg => cfg.AddService("MyApi"))
                 .AddHttpClientInstrumentation()
                 .AddOtlpExporter()
                 .AddZipkinExporter()

@@ -30,7 +30,7 @@ namespace SomeOtherApi
             });
             services.AddOpenTelemetry().WithTracing(cfg =>
                 cfg.AddAspNetCoreInstrumentation()
-                .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("SomeOtherApi"))
+                .ConfigureResource(cfg=> cfg.AddService("SomeOtherApi"))
                 .AddHttpClientInstrumentation()
                 .AddSource(nameof(MessageProducer))
                 .AddOtlpExporter()
